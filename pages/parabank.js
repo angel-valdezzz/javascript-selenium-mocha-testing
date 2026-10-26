@@ -3,7 +3,7 @@ import { Select } from 'selenium-webdriver/lib/select.js';
 import { randomUUID } from 'node:crypto';
 import assert from 'node:assert/strict';
 export class ParaBank {
-  constructor(driver) { this.driver=driver; this.username='qa'+randomUUID().replaceAll('-',''); this.password='DemoPass42!'; }
+  constructor(driver) { this.driver=driver; this.username='qa'+randomUUID().replaceAll('-','').slice(0,18); this.password='DemoPass42!'; }
   async element(id) { return this.driver.wait(until.elementLocated(By.id(id)),20000); }
   async home() { await this.driver.get((process.env.PARABANK_URL || 'https://parabank.parasoft.com/parabank')+'/index.htm'); }
   async link(name) { const e=await this.driver.wait(until.elementLocated(By.linkText(name)),20000); await e.click(); }
